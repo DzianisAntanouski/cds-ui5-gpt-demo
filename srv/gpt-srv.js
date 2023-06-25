@@ -12,10 +12,6 @@ const GPTService = function (srv) {
 
         let gptMessage = await openai.chat(messages);
 
-        // if (!gptMessage) {
-        //     await openai.chat(messages);
-        // }
-
         await oMessage.applyMessage(gptMessage.content, nSessionId, gptMessage.role);
 
         if (nSessionId === 4) {
