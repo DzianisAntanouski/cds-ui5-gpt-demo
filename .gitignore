@@ -10,6 +10,7 @@ node_modules/
 target/
 srv/key.js
 .env
+resources/
 
 # Web IDE, App Studio
 .che/

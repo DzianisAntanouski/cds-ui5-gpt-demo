@@ -121,8 +121,8 @@
                     "viewType": "XML",
                     "transition": "slide",
                     "clearControlAggregation": false,
-                    "viewId": "chat",
-                    "viewName": "chat"
+                    "viewId": "Chat",
+                    "viewName": "Chat"
                 }
             }
         },

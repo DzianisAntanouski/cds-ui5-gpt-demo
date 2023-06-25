@@ -47,7 +47,47 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+- name: cds-ui5-gpt-demo-destination-content
+  type: com.sap.application.content
+  requires:
+      - name: cds-ui5-gpt-demo-destination-service
+        parameters:
+            content-target: true
+      - name: cds-ui5-gpt-demo-repo-host
+        parameters:
+            service-key:
+                name: cds-ui5-gpt-demo-repo-host-key
+      - name: cds-ui5-gpt-demo-uaa
+        parameters:
+            service-key:
+                name: cds-ui5-gpt-demo-uaa-key
+
+  parameters:
+      content:
+          instance:
+              destinations:
+                - Name: chatui_html_repo_host
+                  ServiceInstanceName: ui-html5-srv
+                  ServiceKeyName: cds-ui5-gpt-demo-repo-host-key
+                  sap.cloud.service: chatui
+                - Authentication: OAuth2UserTokenExchange
+                  Name: cds-ui5-gpt-demo-uaa
+                  ServiceInstanceName: cds-ui5-gpt-demo-uaa-srv
+                  ServiceKeyName: cds-ui5-gpt-demo-uaa-key
+                  sap.cloud.service: chatui
+              existing_destinations_policy: ignore
+  build-parameters:
+      no-source: true
+
 resources:
+- name: cds-ui5-gpt-demo-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: cds-ui5-gpt-demo-uaa-srv
+    service-plan: application
+
 - name: cds-ui5-gpt-demo-db
   type: com.sap.xs.hdi-container
   parameters:
@@ -57,13 +97,13 @@ resources:
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: cds-ui5-gpt-demo-html5-srv
+    service-name: ui-html5-srv
     service-plan: app-host
 - name: cds-ui5-gpt-demo-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
     config:
-      HTML5Runtime_enabled: false
+      HTML5Runtime_enabled: true
       init_data:
         instance:
           destinations:
