@@ -10,7 +10,7 @@ const GPTService = function (srv) {
 
         let gptMessage = await openai.chat(messages);
 
-        if (!gptMessage.role) {
+        if (!gptMessage) {
             await openai.chat(messages);
         }
 
