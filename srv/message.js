@@ -27,5 +27,5 @@ class Message {
     }
 }
 
-const mess = new Message();
-module.exports = mess;
+const oMessage = new Message();
+module.exports = oMessage;
