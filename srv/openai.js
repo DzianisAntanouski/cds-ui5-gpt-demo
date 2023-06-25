@@ -16,11 +16,12 @@ class OpenAI {
                 messages,
             });
             return response.data.choices[0].message;
-        } catch (error) {
-            console.log("Err while GPT chat", error.message);
+        } catch (error) {            
+            console.log("Err while GPT chat", error);
+            return false
         }
     }
 }
-console.log(OPENAI_KEY);
+
 const openai = new OpenAI(process.env.OPENAI_KEY);
 module.exports = openai;
