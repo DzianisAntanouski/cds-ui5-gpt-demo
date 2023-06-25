@@ -9,6 +9,7 @@ gen/
 node_modules/
 target/
 srv/key.js
+.env
 
 # Web IDE, App Studio
 .che/
