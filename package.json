@@ -1,30 +1,34 @@
 {
-  "name": "cds-ui5-gpt-demo",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^6",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "dotenv": "^16.3.1",
-    "express": "^4",
-    "openai": "^3.3.0",
-    "hdb": "^0.19.0"
-  },
-  "devDependencies": {
-    "sqlite3": "^5"
-  },
-  "scripts": {
-    "start": "cds-serve",
-    "dev": "cds watch --in-memory",
-    "push": "git push https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git",
-    "hybrid": "cds watch --profile hybrid"
-  },
-  "cds": {
-    "requires": {
-      "db": "hana-cloud"
+    "name": "cds-ui5-gpt-demo",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^6",
+        "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+        "dotenv": "^16.3.1",
+        "express": "^4",
+        "openai": "^3.3.0",
+        "hdb": "^0.19.0"
+    },
+    "devDependencies": {
+        "sqlite3": "^5",
+        "rimraf": "^3.0.2"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "dev": "cds watch --in-memory",
+        "push": "git push https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git",
+        "hybrid": "cds watch --profile hybrid",
+        "undeploy": "cf undeploy cds-ui5-gpt-demo --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "requires": {
+            "db": "hana-cloud"
+        }
     }
-  }
 }
