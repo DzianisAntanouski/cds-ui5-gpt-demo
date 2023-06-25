@@ -22,7 +22,7 @@ class Message {
             await INSERT(oUserMessage).into(this.msgTable);
             return `OK`;
         } catch (error) {
-            return `${error}`;
+            return `${error.message}`;
         }
     }
 }

@@ -52,8 +52,25 @@ sap.ui.define(
                 });
             },
 
-            onPressClear: function () {
-                alert("Clear pressed")
+            onPressClear: function (oEvent) {
+                const nSessionId = oEvent.getSource().getBindingContext().getObject().ID;
+
+                const oModel = this.getView().getModel();
+
+                oModel.callFunction("/clearSession", {
+                    method: "GET",
+                    urlParameters: {
+                        nSessionId
+                    },
+                    success: function (oData, response) {
+                        this.getView().getModel().refresh();
+                        alert(oData.clearSession)
+                    }.bind(this),
+                    error: (e) => {
+                        console.error(e);
+                        alert("Error")
+                    },
+                });
             }
         });
     }
