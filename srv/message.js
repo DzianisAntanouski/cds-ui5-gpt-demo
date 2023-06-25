@@ -15,7 +15,7 @@ class Message {
                 Session_ID: sSessionId,
                 role,
                 content,
-                User_ID: oSession[0].User_ID,
+                User_ID: oSession[0].USER_ID,
                 Date: new Date(),
             };
 

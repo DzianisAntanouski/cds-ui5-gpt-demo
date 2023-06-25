@@ -19,7 +19,8 @@
   "scripts": {
     "start": "cds-serve",
     "dev": "cds watch --in-memory",
-    "push": "git push https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git"
+    "push": "git push https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git",
+    "hybrid": "cds watch --profile hybrid"
   },
   "cds": {
     "requires": {

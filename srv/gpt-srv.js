@@ -4,15 +4,17 @@ const oMessage = require("./message.js");
 
 const GPTService = function (srv) {
     srv.on("sendMessage", async ({ data: { sMessage, nSessionId } }) => {
+        // await DELETE.from('DB_MESSAGE').where({ Session_ID: nSessionId })
+        // return `deleted`
         await oMessage.applyMessage(sMessage, nSessionId, "user");
 
         const messages = await SELECT.from("DB_MESSAGE").where({ Session_ID: nSessionId }).columns("role", "content");
 
         let gptMessage = await openai.chat(messages);
 
-        if (!gptMessage) {
-            await openai.chat(messages);
-        }
+        // if (!gptMessage) {
+        //     await openai.chat(messages);
+        // }
 
         await oMessage.applyMessage(gptMessage.content, nSessionId, gptMessage.role);
 
