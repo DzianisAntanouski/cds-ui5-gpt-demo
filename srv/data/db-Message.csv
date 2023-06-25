@@ -1,0 +1,8 @@
+ID,Session_ID,role,content,User_ID,Date
+4,2,assistant,"Hi there",1,
+5,2,user,"Explain me information about custom list?",1,
+6,2,assistant,"Custom list includes two items: first item equal 5 and second item equal 12",1,
+7,3,user,"Hey",2,
+8,3,assistant,"How's it going?",2,
+9,3,user,"Take care",2,
+10,4,system,"Answer in German",2,

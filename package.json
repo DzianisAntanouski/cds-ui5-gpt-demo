@@ -15,6 +15,7 @@
     "sqlite3": "^5"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "dev": "cds watch --in-memory"
   }
 }
