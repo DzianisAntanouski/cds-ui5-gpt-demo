@@ -1,0 +1,9 @@
+{
+    "xsappname": "cds-ui5-gpt-demo",
+    "tenant-mode": "dedicated",
+    "description": "Security profile of called application",
+    "scopes": [],
+    "attributes": [],
+    "role-templates": [],
+    "role-collections": []
+}

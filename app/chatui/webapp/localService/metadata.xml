@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="GPTService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="User" EntityType="GPTService.User"/>
+                <EntitySet Name="Session" EntityType="GPTService.Session"/>
+                <EntitySet Name="Messages" EntityType="GPTService.Messages"/>
+                <FunctionImport Name="sendMessage" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="sMessage" Type="Edm.String" Mode="In" Nullable="true"/>
+                    <Parameter Name="nSessionId" Type="Edm.Int32" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <AssociationSet Name="Session_User" Association="GPTService.Session_User">
+                    <End Role="Session" EntitySet="Session"/>
+                    <End Role="User" EntitySet="User"/>
+                </AssociationSet>
+                <AssociationSet Name="Messages_Session" Association="GPTService.Messages_Session">
+                    <End Role="Messages" EntitySet="Messages"/>
+                    <End Role="Session" EntitySet="Session"/>
+                </AssociationSet>
+                <AssociationSet Name="Messages_User" Association="GPTService.Messages_User">
+                    <End Role="Messages" EntitySet="Messages"/>
+                    <End Role="User" EntitySet="User"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="User">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="Sessions" Relationship="GPTService.Session_User" FromRole="User" ToRole="Session"/>
+                <NavigationProperty Name="Messages" Relationship="GPTService.Messages_User" FromRole="User" ToRole="Messages"/>
+            </EntityType>
+            <EntityType Name="Session">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="User" Relationship="GPTService.Session_User" FromRole="Session" ToRole="User"/>
+                <Property Name="User_ID" Type="Edm.Int32"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="Messages" Relationship="GPTService.Messages_Session" FromRole="Session" ToRole="Messages"/>
+            </EntityType>
+            <EntityType Name="Messages">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="Session" Relationship="GPTService.Messages_Session" FromRole="Messages" ToRole="Session"/>
+                <Property Name="Session_ID" Type="Edm.Int32"/>
+                <Property Name="role" Type="Edm.String"/>
+                <Property Name="content" Type="Edm.String"/>
+                <NavigationProperty Name="User" Relationship="GPTService.Messages_User" FromRole="Messages" ToRole="User"/>
+                <Property Name="User_ID" Type="Edm.Int32"/>
+                <Property Name="Date" Type="Edm.DateTime" sap:display-format="Date"/>
+            </EntityType>
+            <Association Name="Session_User">
+                <End Role="Session" Type="GPTService.Session" Multiplicity="*"/>
+                <End Role="User" Type="GPTService.User" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="User">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Session">
+                        <PropertyRef Name="User_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Messages_Session">
+                <End Role="Messages" Type="GPTService.Messages" Multiplicity="*"/>
+                <End Role="Session" Type="GPTService.Session" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Session">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Messages">
+                        <PropertyRef Name="Session_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Messages_User">
+                <End Role="Messages" Type="GPTService.Messages" Multiplicity="*"/>
+                <End Role="User" Type="GPTService.User" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="User">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Messages">
+                        <PropertyRef Name="User_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="GPTService.Messages/role" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="assistant"/>
+                            <PropertyValue Property="Value" String="assistant"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="user"/>
+                            <PropertyValue Property="Value" String="user"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="system"/>
+                            <PropertyValue Property="Value" String="system"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
