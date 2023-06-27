@@ -10,6 +10,8 @@ node_modules/
 target/
 srv/key.js
 .env
+app/chatui/dist
+resources
 
 # Web IDE, App Studio
 .che/
