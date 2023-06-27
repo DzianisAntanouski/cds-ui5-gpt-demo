@@ -9,6 +9,10 @@ const GPTService = function (srv) {
         const messages = await SELECT.from("DB_MESSAGE").where({ Session_ID: nSessionId }).columns("role", "content");
 
         let gptMessage = await openai.chat(messages);
+        
+        if (!gptMessage) {
+            return `ERROR`
+        }
 
         await oMessage.applyMessage(gptMessage.content, nSessionId, gptMessage.role);
 
