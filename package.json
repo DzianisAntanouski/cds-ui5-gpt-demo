@@ -1,8 +1,12 @@
 {
     "name": "cds-ui5-gpt-demo",
     "version": "1.0.0",
+    "author": {
+        "email": "dzianisantanouski@leverx.com",
+        "name": "Dzianis Antanouski"
+    },
     "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
+    "repository": "https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git",
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
@@ -20,7 +24,6 @@
     "scripts": {
         "start": "cds-serve",
         "dev": "cds watch --in-memory",
-        "push": "git push https://github.com/DzianisAntanouski/cds-ui5-gpt-demo.git",
         "hybrid": "cds watch --profile hybrid",
         "undeploy": "cf undeploy cds-ui5-gpt-demo --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
