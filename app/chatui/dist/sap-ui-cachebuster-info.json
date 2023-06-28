@@ -1,0 +1,19 @@
+{
+  "controller/App.controller.js": 1687938162257,
+  "utils/locate-reuse-libs.js": 1687938162269,
+  "manifest.json": 1687941286811,
+  "model/models.js": 1687938162263,
+  "controller/Chat.controller.js": 1687938181675,
+  "i18n/i18n.properties": 1687938162258,
+  "Component.js": 1687938162256,
+  "Component-preload.js": 1687941287055,
+  "controller/Chat-dbg.controller.js": 1687938181675,
+  "model/models-dbg.js": 1687938162263,
+  "utils/locate-reuse-libs-dbg.js": 1687938162269,
+  "controller/App-dbg.controller.js": 1687938162257,
+  "Component-dbg.js": 1687938162256,
+  "view/Chat.view.xml": 1687938181676,
+  "view/App.view.xml": 1687938162269,
+  "css/style.css": 1687938162258,
+  "index.html": 1687938162258
+}
