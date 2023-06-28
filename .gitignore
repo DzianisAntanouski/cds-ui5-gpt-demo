@@ -11,6 +11,7 @@ target/
 srv/key.js
 .env
 resources/
+srv/key/
 
 # Web IDE, App Studio
 .che/
