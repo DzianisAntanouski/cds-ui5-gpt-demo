@@ -18,7 +18,7 @@ const GPTService = function (srv) {
         await oMessage.applyMessage(gptMessage.content, nSessionId, gptMessage.role);
 
         if (nSessionId === 4) {
-            await oMessage.applyMessage("answer in French", nSessionId, "system");
+            await oMessage.applyMessage("answer in German", nSessionId, "system");
         }
 
         return `OK`;
