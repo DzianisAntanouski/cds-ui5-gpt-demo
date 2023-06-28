@@ -13,6 +13,7 @@ resources/
 # Web IDE, App Studio
 .che/
 .gen/
+app/chatui/dist/
 
 # MTA
 *_mta_build_tmp
