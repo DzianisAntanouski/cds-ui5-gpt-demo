@@ -11,6 +11,7 @@ const GPTService = function (srv) {
         let gptMessage = await openai.chat(messages);
         
         if (!gptMessage) {
+            await oMessage.removeLastMessage();
             return `ERROR`
         }
 
