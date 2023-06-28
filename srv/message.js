@@ -2,6 +2,7 @@ class Message {
     constructor() {
         this.msgTable = "DB_MESSAGE";
         this.sessionTable = "DB_SESSION";
+        this.lastID;
     }
 
     async applyMessage(content, sSessionId, role) {
@@ -20,8 +21,20 @@ class Message {
             };
 
             await INSERT(oUserMessage).into(this.msgTable);
+            this.lastID = nNewId;
             return `OK`;
         } catch (error) {
+            console.error(`Operation create failed`);
+            return `${error.message}`;
+        }
+    }
+
+    async removeLastMessage() {
+        try {
+            await DELETE.from(this.msgTable).where({ ID: this.lastID });
+            return `OK`;
+        } catch (error) {
+            console.error(`Operation remove failed`);
             return `${error.message}`;
         }
     }

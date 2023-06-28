@@ -11,13 +11,14 @@ const GPTService = function (srv) {
         let gptMessage = await openai.chat(messages);
         
         if (!gptMessage) {
+            await oMessage.removeLastMessage();
             return `ERROR`
         }
 
         await oMessage.applyMessage(gptMessage.content, nSessionId, gptMessage.role);
 
         if (nSessionId === 4) {
-            await oMessage.applyMessage("answer in French", nSessionId, "system");
+            await oMessage.applyMessage("answer in German", nSessionId, "system");
         }
 
         return `OK`;
