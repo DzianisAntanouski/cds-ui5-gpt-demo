@@ -8,7 +8,9 @@ default-*.json
 gen/
 node_modules/
 target/
-
+app/chatui/dist/
+resources/
+srv/key/
 # Web IDE, App Studio
 .che/
 .gen/
