@@ -8,7 +8,7 @@ default-*.json
 gen/
 node_modules/
 target/
-srv/key.js
+srv/key
 .env
 app/chatui/dist
 resources
