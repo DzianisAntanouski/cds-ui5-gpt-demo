@@ -1,5 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
-require("dotenv").config();
+const CONST = require("./key/key.json");
 
 class OpenAI {
     constructor(apiKey) {
@@ -23,5 +23,5 @@ class OpenAI {
     }
 }
 
-const openai = new OpenAI(process.env.OPENAI_KEY);
+const openai = new OpenAI(CONST.OPENAI_KEY);
 module.exports = openai;
