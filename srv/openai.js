@@ -1,5 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
-require("dotenv").config();
+const CONST = require("./key/key.json");
 
 class OpenAI {
     constructor(apiKey) {
@@ -16,12 +16,12 @@ class OpenAI {
                 messages,
             });
             return response.data.choices[0].message;
-        } catch (error) {            
+        } catch (error) {
             console.log("Err while GPT chat", error);
-            return false
+            return false;
         }
     }
 }
 
-const openai = new OpenAI(process.env.OPENAI_KEY);
+const openai = new OpenAI(CONST.OPENAI_KEY);
 module.exports = openai;
